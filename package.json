@@ -1,0 +1,25 @@
+{
+  "name": "summer-end-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elyashiv67/summerEndProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elyashiv67/summerEndProject/issues"
+  },
+  "homepage": "https://github.com/elyashiv67/summerEndProject#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
