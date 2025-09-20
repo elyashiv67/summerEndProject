@@ -65,6 +65,38 @@ router.delete('/:id',(req,res)=>{
   res.json({message:"this item deleted"});
 })
 
+router.patch('/:id',upload.single('myFile'),(req,res)=>{
+      let id = Number(req.params.id);
+  
+   if(isNaN(id)){
+      return res.json({message:"id is not valid"});
+   }
+  
+   let corse = corses[id];
+  
+   if(!corse){
+          return res.json({message:"not exist"});
+      };
+  
+      let oldFileName = corse.filename;
+      let newFileName = req.file ? req.file.filename : null;
+  
+      if(oldFileName && newFileName && newFileName !== oldFileName){
+          if(fs.existsSync(path.join('images',oldFileName))){
+             fs.unlinkSync(path.join('images',oldFileName));
+          }
+          product.filename = newFileName;
+      }
+   
+   let name = req.body.name;
+   let rating = parseFloat(req.body.rating);
+   if(name) corse.name = name;
+   if(rating) corse.rating = rating;
+  
+   res.json({message:"updated"});
+  
+})
+
 
 
 
