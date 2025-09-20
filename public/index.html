@@ -4,13 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>summer project</title>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../public/index.css">
 </head>
-<body>
-    
+<body>  
 <h1>try</h1>
+<div id="inputs">
+    <input id="id" type="hidden">
+    <label for="name">Name: <input id="name"></label>
+    <br> 
+    <label for="description">description: <textarea id="description" type="text" maxlength="50"></textarea></label>
+    <br>
+    <label for="rating">rating: 
+        <input id="rating" type="range" min="0" max="5" step="0.5" value="0" oninput="output.value = this.value">
+        <output id="output">0</output>
+    </label>
+    <br>
+    <label for="myFile">Image: <input id= "myFile" type="file"></label>
+    <br>
+    <img id="myImage" src="" alt="image">
+    <br>
+    <button onclick="addOrEdit()">Send</button>
+    <hr>
+</div>
+<div id="main"></div>
 
-
-    <script src="./index.js"></script>
+    <script src="../public/index.js"></script>
 </body>
 </html>

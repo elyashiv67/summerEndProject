@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #444;
+}
+
+#inputs {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-wrap: wrap;       /* allow wrapping on smaller screens */
+  gap: 12px;             /* space between items */
+}
+
+/* Each label/input pair */
+#inputs label {
+  flex: 1 1 45%;         /* about half width each */
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Special case: rating label should be row layout */
+#inputs label[for="rating"] {
+  flex-direction: row;   /* put slider + output side by side */
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Inputs inside labels */
+#inputs input,
+#inputs textarea {
+  margin-top: 4px;
+  padding: 6px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Hidden input stays hidden */
+#inputs input[type="hidden"] {
+  display: none;
+}
+
+/* Range slider */
+#inputs input[type="range"] {
+  flex: 1;               /* slider takes remaining space */
+  margin-right: 8px;
+  padding: 0;
+  height: 20px;
+}
+
+/* Output value next to slider */
+#inputs output {
+  min-width: 40px;
+  text-align: center;
+  font-weight: bold;
+  color: #0077cc;
+  font-size: 13px;
+}
+
+/* Image preview */
+#myImage {
+  max-width: 100%;
+  max-height: 120px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+/* Button spans full width */
+#inputs button {
+  flex: 1 1 100%;
+  background-color: #0077cc;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+#inputs button:hover {
+  background-color: #005fa3;
+}
+
+hr {
+  flex: 1 1 100%;
+  margin: 12px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
