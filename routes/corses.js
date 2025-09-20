@@ -29,6 +29,42 @@ router.get('/',(req,res)=>{
     res.json(corses);
 })
 
+router.post('/',upload.single('myFile'),(req,res)=>{
+  let name = req.body.name;
+  if(!name){
+     return res.json({message:"please enter a valid text"});
+  }
+let id = nextID++;
+let description = req.body.description;
+let rating = req.body.rating;
+let filename = req.file? req.file.filename: null;
+let cours = {id,name,rating:parseFloat(rating),description,filename};
+corses[id] = cours;
+res.json({message:"ok"});
+})
+
+router.delete('/:id',(req,res)=>{
+   let currentId = Number(req.params.id);
+  
+   if(isNaN(currentId)){
+      return res.json({message:"id is not valid"});
+   }
+  
+   let corse = corses[currentId];
+  
+   if(!corse){
+          return res.json({message:"not exist"});
+      }
+  corses[currentId] = null;
+  if(corse.filename){
+  if(fs.existsSync(path.join('images',corse.filename))){
+      fs.unlinkSync(path.join('images',corse.filename));
+  }
+  }
+  
+  res.json({message:"this item deleted"});
+})
+
 
 
 
