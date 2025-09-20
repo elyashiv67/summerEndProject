@@ -19,27 +19,27 @@ h1 {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
   display: flex;
-  flex-wrap: wrap;       /* allow wrapping on smaller screens */
-  gap: 12px;             /* space between items */
+  flex-wrap: wrap;       
+  gap: 12px;             
 }
 
-/* Each label/input pair */
+
 #inputs label {
-  flex: 1 1 45%;         /* about half width each */
+  flex: 1 1 45%;         
   display: flex;
   flex-direction: column;
   font-size: 14px;
   font-weight: bold;
 }
 
-/* Special case: rating label should be row layout */
+
 #inputs label[for="rating"] {
-  flex-direction: row;   /* put slider + output side by side */
+  flex-direction: row;   
   align-items: center;
   justify-content: space-between;
 }
 
-/* Inputs inside labels */
+
 #inputs input,
 #inputs textarea {
   margin-top: 4px;
@@ -50,20 +50,20 @@ h1 {
   box-sizing: border-box;
 }
 
-/* Hidden input stays hidden */
+
 #inputs input[type="hidden"] {
   display: none;
 }
 
-/* Range slider */
+
 #inputs input[type="range"] {
-  flex: 1;               /* slider takes remaining space */
+  flex: 1;               
   margin-right: 8px;
   padding: 0;
   height: 20px;
 }
 
-/* Output value next to slider */
+
 #inputs output {
   min-width: 40px;
   text-align: center;
@@ -72,7 +72,7 @@ h1 {
   font-size: 13px;
 }
 
-/* Image preview */
+
 #myImage {
   max-width: 100%;
   max-height: 120px;
@@ -81,7 +81,7 @@ h1 {
   margin-top: 6px;
 }
 
-/* Button spans full width */
+
 #inputs button {
   flex: 1 1 100%;
   background-color: #0077cc;
@@ -103,4 +103,30 @@ hr {
   margin: 12px 0;
   border: none;
   border-top: 1px solid #eee;
+}
+#main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100px;
+    height: 200px;
+    border: solid black 1px;
+    border-radius: 25px;
+    text-align: center;
+    background-color: bisque;
+}
+.card img{
+    width: 90%;
+    height: 50%;
+    margin: 10px;
+}
+#myImage{
+    width: 50px;
+    height: 50px;
 }

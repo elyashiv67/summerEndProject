@@ -28,5 +28,43 @@ function createGrid(data){
     }
     document.getElementById('main').innerHTML = txt;
 }
+function clearInputs(){
+    document.getElementById('id').value = "";
+    document.getElementById('name').value = "";
+    document.getElementById('description').value = "";
+    document.getElementById('rating').value = 0;
+    document.getElementById('output').value = 0;
+    document.getElementById('myFile').value = "";
+    document.getElementById('myImage').src = "";
+}
+
+async function addCorse() {
+    try{
+        let name = document.getElementById('name').value;
+        let rating = document.getElementById('rating').value;
+        let description = document.getElementById('description').value;
+        let myFile = document.getElementById('myFile').files[0];
+        let formData = new FormData();
+        formData.append('name',name);
+        formData.append('rating',rating);
+        formData.append('description',description);
+        if(myFile){
+            formData.append('myFile',myFile)
+        }
+        await fetch('/c',{
+            method:'POST',
+            body:formData
+        })
+        getData();
+        clearInputs();
+    }catch(err){
+        alert(err)
+    }
+    
+}
+
+function addOrEdit(){
+    addCorse();
+}
 
 getData();
