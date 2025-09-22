@@ -65,6 +65,20 @@ router.delete('/:id',(req,res)=>{
   res.json({message:"this item deleted"});
 })
 
+router.get('/:id',(req,res)=>{
+  let id = Number(req.params.id);
+  if(isNaN(id)){
+    return res.json({message:"id is illegal"})
+  }
+  let corse = corses[id];
+  if(!corse){
+    return res.json("not exsist")
+  }
+  res.json(corse);
+})
+
+
+
 router.patch('/:id',upload.single('myFile'),(req,res)=>{
       let id = Number(req.params.id);
   

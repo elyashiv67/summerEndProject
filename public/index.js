@@ -20,7 +20,7 @@ function createGrid(data){
                         <div>${obj.rating}</div>
                     </div>
                     <div>
-                        <button onclick="deleteProduct(${obj.id})">Delete</button>
+                        <button onclick="deleteItem(${obj.id})">Delete</button>
                         <button onclick="getById(${obj.id})">Edit</button>
                     </div>
                 </div>`
@@ -34,8 +34,8 @@ function clearInputs(){
     document.getElementById('description').value = "";
     document.getElementById('rating').value = 0;
     document.getElementById('output').value = 0;
-    document.getElementById('myFile').value = "";
-    document.getElementById('myImage').src = "";
+    document.getElementById('imageU').value = "";
+    document.getElementById('imageP').src = "";
 }
 
 async function addCorse() {
@@ -43,13 +43,13 @@ async function addCorse() {
         let name = document.getElementById('name').value;
         let rating = document.getElementById('rating').value;
         let description = document.getElementById('description').value;
-        let myFile = document.getElementById('myFile').files[0];
+        let imageU = document.getElementById('imageU').files[0];
         let formData = new FormData();
         formData.append('name',name);
         formData.append('rating',rating);
         formData.append('description',description);
-        if(myFile){
-            formData.append('myFile',myFile)
+        if(imageU){
+            formData.append('imageU',imageU)
         }
         await fetch('/c',{
             method:'POST',
@@ -64,7 +64,70 @@ async function addCorse() {
 }
 
 function addOrEdit(){
-    addCorse();
+    let id = document.getElementById('id').value;
+    if(id){
+        editItem(id);
+    }else{
+        addCorse();
+    }
 }
 
 getData();
+
+async function deleteItem(id) {
+    try {
+        if(confirm('are you sure?')){
+    await fetch(`/c/${id}`,{
+        method: 'DELETE'
+    })}
+    getData();
+        
+    } catch (error) {
+        alert(error);
+    }
+}
+
+
+
+async function getById(id) {
+    try {
+        let response = await fetch(`/c/${id}`);
+        let obj = await response.json();
+        document.getElementById('id').value = obj.id;
+        document.getElementById('name').value = obj.name;
+        document.getElementById('description').value = obj.description;
+        document.getElementById('rating').value = obj.rating;
+        document.getElementById('output').value = obj.rating;
+        document.getElementById('imageP').src = "../images/"+obj.filename;
+        
+    } catch (error) {
+        alert(error);
+    }
+    
+}
+
+async function editItem(id) {
+    try {
+        let name = document.getElementById('name').value;
+        let description = document.getElementById('description').value;
+        let rating = document.getElementById('rating').value;
+        let filename = document.getElementById('imageU').files[0];
+        let formData = new FormData();
+        formData.append('name',name);
+        formData.append('rating',rating);
+        formData.append('description',description);
+        if(imageU){
+            formData.append('imageU',imageU)
+        }
+        await fetch(`/c/${id}`,{
+            method:'PATCH',
+            body:formData
+        })
+        getData();
+        clearInputs();
+        
+    } catch (error) {
+        alert(error)
+    }
+    
+}
