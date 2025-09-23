@@ -36,9 +36,9 @@ router.post('/',upload.single('myFile'),(req,res)=>{
   }
 let id = nextID++;
 let description = req.body.description;
-let rating = req.body.rating;
+let rating = [];
 let filename = req.file? req.file.filename: null;
-let cours = {id,name,rating:parseFloat(rating),description,filename};
+let cours = {id,name,rating,description,filename};
 corses[id] = cours;
 res.json({message:"ok"});
 })
@@ -103,12 +103,36 @@ router.patch('/:id',upload.single('myFile'),(req,res)=>{
       }
    
    let name = req.body.name;
-   let rating = parseFloat(req.body.rating);
+   // let rating = parseFloat(req.body.rating);
    if(name) corse.name = name;
-   if(rating) corse.rating = rating;
+   // if(rating) corse.rating = rating;
   
    res.json({message:"updated"});
   
+})
+
+router.patch('/L/:id',(req,res)=>{
+   let id = Number(req.params.id);
+
+   if(isNaN(id)){
+      return res.json({message:"id is not valid"});
+   }
+
+   let corse = corses[id];
+
+   if(!corse){
+          return res.json({message:"not exist"});
+      };
+
+   let currentIP = req.ip;
+   
+
+   if(corse.rating.includes(currentIP)){
+      return  res.json({message:"already exist"});
+   }
+
+   corse.rating.push(currentIP);
+   res.json({message:"updated"});
 })
 
 

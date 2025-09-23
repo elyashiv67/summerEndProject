@@ -17,8 +17,11 @@ function createGrid(data){
                     <div>
                         <p>${obj.name}</p>
                         <p>${obj.description}</p>
-                        <div>${obj.rating}</div>
+                        <div>${obj.rating.length}</div>
                     </div>
+                    <br>
+                    <div class="likeBtn" onclick="addLike(${obj.id})"><span>&#128077;&#127996;</span></div>
+                    <br>
                     <div>
                         <button onclick="deleteItem(${obj.id})">Delete</button>
                         <button onclick="getById(${obj.id})">Edit</button>
@@ -32,8 +35,6 @@ function clearInputs(){
     document.getElementById('id').value = "";
     document.getElementById('name').value = "";
     document.getElementById('description').value = "";
-    document.getElementById('rating').value = 0;
-    document.getElementById('output').value = 0;
     document.getElementById('imageU').value = "";
     document.getElementById('imageP').src = "";
 }
@@ -41,12 +42,10 @@ function clearInputs(){
 async function addCorse() {
     try{
         let name = document.getElementById('name').value;
-        let rating = document.getElementById('rating').value;
         let description = document.getElementById('description').value;
         let imageU = document.getElementById('imageU').files[0];
         let formData = new FormData();
         formData.append('name',name);
-        formData.append('rating',rating);
         formData.append('description',description);
         if(imageU){
             formData.append('imageU',imageU)
@@ -96,7 +95,6 @@ async function getById(id) {
         document.getElementById('id').value = obj.id;
         document.getElementById('name').value = obj.name;
         document.getElementById('description').value = obj.description;
-        document.getElementById('rating').value = obj.rating;
         document.getElementById('output').value = obj.rating;
         document.getElementById('imageP').src = "../images/"+obj.filename;
         
@@ -110,11 +108,9 @@ async function editItem(id) {
     try {
         let name = document.getElementById('name').value;
         let description = document.getElementById('description').value;
-        let rating = document.getElementById('rating').value;
         let filename = document.getElementById('imageU').files[0];
         let formData = new FormData();
         formData.append('name',name);
-        formData.append('rating',rating);
         formData.append('description',description);
         if(imageU){
             formData.append('imageU',imageU)
@@ -128,6 +124,19 @@ async function editItem(id) {
         
     } catch (error) {
         alert(error)
+    }
+    
+}
+
+async function addLike(id) {
+    try {
+        await fetch(`/c/L/${id}`,{
+            method:'PATCH'
+        })
+        getData();
+        
+    } catch (error) {
+        alert(error);
     }
     
 }
