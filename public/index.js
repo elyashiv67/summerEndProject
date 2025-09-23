@@ -15,6 +15,7 @@ function createGrid(data){
             txt += 
                 `<div class="card">
                     <div>
+                        <img src="../images/${obj.filename}?t=${Date.now()}" alt="${obj.name}">
                         <p>${obj.name}</p>
                         <p>${obj.description}</p>
                         <div>${obj.rating.length}</div>
@@ -95,8 +96,7 @@ async function getById(id) {
         document.getElementById('id').value = obj.id;
         document.getElementById('name').value = obj.name;
         document.getElementById('description').value = obj.description;
-        document.getElementById('output').value = obj.rating;
-        document.getElementById('imageP').src = "../images/"+obj.filename;
+        document.getElementById('imageP').src = "../images/" + obj.filename + "?t=" + Date.now();
         
     } catch (error) {
         alert(error);
@@ -108,7 +108,7 @@ async function editItem(id) {
     try {
         let name = document.getElementById('name').value;
         let description = document.getElementById('description').value;
-        let filename = document.getElementById('imageU').files[0];
+        let imageU = document.getElementById('imageU').files[0];
         let formData = new FormData();
         formData.append('name',name);
         formData.append('description',description);

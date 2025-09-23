@@ -29,7 +29,7 @@ router.get('/',(req,res)=>{
     res.json(corses);
 })
 
-router.post('/',upload.single('myFile'),(req,res)=>{
+router.post('/',upload.single('imageU'),(req,res)=>{
   let name = req.body.name;
   if(!name){
      return res.json({message:"please enter a valid text"});
@@ -79,7 +79,7 @@ router.get('/:id',(req,res)=>{
 
 
 
-router.patch('/:id',upload.single('myFile'),(req,res)=>{
+router.patch('/:id',upload.single('imageU'),(req,res)=>{
       let id = Number(req.params.id);
   
    if(isNaN(id)){
