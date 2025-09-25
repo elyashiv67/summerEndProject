@@ -14,18 +14,18 @@ function createGrid(data){
         if(obj){
             txt += 
                 `<div class="card">
-                    <div onclick="showToJudge(${obj.id})">
+                    <div class="cardDetail" onclick="showToJudge(${obj.id})">
                         <img src="../images/${obj.filename}?t=${Date.now()}" alt="${obj.name}">
                         <p>${obj.name}</p>
                         <p>${obj.description}</p>
                         <div>${obj.rating.length}</div>
                     </div>
                     <br>
-                    <div class="likeBtn" onclick="addLike(${obj.id})"><span>&#128077;&#127996;</span></div>
+                    <div class="likeBtn" onclick="addLike(${obj.id})"><i class="fa fa-heart" aria-hidden="false"></i></div>
                     <br>
-                    <div>
-                        <button onclick="deleteItem(${obj.id})">Delete</button>
-                        <button onclick="getById(${obj.id})">Edit</button>
+                    <div class="cardBTN">
+                        <span id="delete" onclick="deleteItem(${obj.id})"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                        <span id="edit" onclick="getById(${obj.id})"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                     </div>
                 </div>`
         }

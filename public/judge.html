@@ -6,7 +6,7 @@
     <title>judge view</title>
     <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         background-color: #f4f4f4;
         margin: 20px;
         padding: 20px;
@@ -19,12 +19,14 @@
         margin-bottom: 10px;
         border-radius: 8px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        
     }
 
     img {
-        max-width: 100%;
+        max-width: 35%;
         height: auto;
         border-radius: 5px;
+        margin-top: 5px;
     }
 
     #nameTxt, #descriptionTxt, #votersTxt {
@@ -36,13 +38,16 @@
         text-align: center;
         color: #444;
     }
+    strong{
+        font-size: larger;
+    }
 </style>
 </head>
 <body>
-    <div id="name">name:<p id="nameTxt"></p></div><br>
-    <div id="description">description:<p id="descriptionTxt"></p></div><br>
-    <div id="image">image: <img id="imgTxt" src="" alt=""></div><br>
-    <div id="voters">voters:<p id="votersTxt"></p></div><br>
+    <div id="name"><strong>name:</strong><p id="nameTxt"></p></div><br>
+    <div id="description"><strong>description:</strong><p id="descriptionTxt"></p></div><br>
+    <div id="image"><strong>image:</strong> <br><img id="imgTxt" src="" alt=""></div><br>
+    <div id="voters"><strong>voters:</strong><p id="votersTxt"></p></div><br>
 
 
 
@@ -57,7 +62,7 @@ window.onload = async function() {
             document.getElementById('nameTxt').innerText = obj.name;
             document.getElementById('descriptionTxt').innerText = obj.description;
             document.getElementById('imgTxt').src = "../images/" + obj.filename + "?t=" + Date.now();
-            document.getElementById('votersTxt').innerText = obj.rating.join(', ');
+            document.getElementById('votersTxt').innerHTML =`sum of voters:  ${obj.rating.length} <br> ${obj.rating.join(', ')}`;
         } catch (error) {
             alert(error);
         }
