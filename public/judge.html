@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>judge view</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
+        padding: 20px;
+        color: #333;
+    }
+
+    div {
+        background-color: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    #nameTxt, #descriptionTxt, #votersTxt {
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #444;
+    }
+</style>
+</head>
+<body>
+    <div id="name">name:<p id="nameTxt"></p></div><br>
+    <div id="description">description:<p id="descriptionTxt"></p></div><br>
+    <div id="image">image: <img id="imgTxt" src="" alt=""></div><br>
+    <div id="voters">voters:<p id="votersTxt"></p></div><br>
+
+
+
+<script>
+window.onload = async function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (id) {
+        try {
+            let response = await fetch(`/c/${id}`);
+            let obj = await response.json();
+            document.getElementById('nameTxt').innerText = obj.name;
+            document.getElementById('descriptionTxt').innerText = obj.description;
+            document.getElementById('imgTxt').src = "../images/" + obj.filename + "?t=" + Date.now();
+            document.getElementById('votersTxt').innerText = obj.rating.join(', ');
+        } catch (error) {
+            alert(error);
+        }
+    }
+};
+</script>
+</body>
+</html>

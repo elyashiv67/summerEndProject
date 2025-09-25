@@ -14,7 +14,7 @@ function createGrid(data){
         if(obj){
             txt += 
                 `<div class="card">
-                    <div>
+                    <div onclick="showToJudge(${obj.id})">
                         <img src="../images/${obj.filename}?t=${Date.now()}" alt="${obj.name}">
                         <p>${obj.name}</p>
                         <p>${obj.description}</p>
@@ -130,13 +130,19 @@ async function editItem(id) {
 
 async function addLike(id) {
     try {
-        await fetch(`/c/L/${id}`,{
-            method:'PATCH'
-        })
+        let response = await fetch(`/c/L/${id}`,{
+             method:'PATCH'
+         })
+        let message = await response.json();
+        alert(message.message);
         getData();
         
     } catch (error) {
         alert(error);
     }
     
+}
+
+function showToJudge(id){
+    window.open(`judge.html?id=${id}`, '_blank');
 }

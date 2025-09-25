@@ -128,11 +128,11 @@ router.patch('/L/:id',(req,res)=>{
    
 
    if(corse.rating.includes(currentIP)){
-      return  res.json({message:"already exist"});
+      return  res.json({message:"you voted already"});
    }
 
    corse.rating.push(currentIP);
-   res.json({message:"updated"});
+   res.json({message:"vote added"});
 })
 
 
