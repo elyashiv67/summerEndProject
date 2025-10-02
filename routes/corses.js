@@ -103,8 +103,10 @@ router.patch('/:id',upload.single('imageU'),(req,res)=>{
       }
    
    let name = req.body.name;
+   let description = req.body.description;
    // let rating = parseFloat(req.body.rating);
    if(name) corse.name = name;
+   if(description) corse.description = description;
    // if(rating) corse.rating = rating;
   
    res.json({message:"updated"});
